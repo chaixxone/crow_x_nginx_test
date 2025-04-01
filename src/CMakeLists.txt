@@ -7,13 +7,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if (WIN32)
 	set(CMAKE_PREFIX_PATH "C:/dev/vcpkg/installed/x64-windows")
 	set(CMAKE_TOOLCHAIN_FILE "C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake")
+else()
+	set(CMAKE_C_COMPILER "/usr/bin/gcc" CACHE PATH "" FORCE)
+	set(CMAKE_CXX_COMPILER "/usr/bin/g++" CACHE PATH "" FORCE)
 endif()
 
 add_executable(app main.cpp)
 
 find_package(Crow CONFIG REQUIRED)
+find_package(fmt REQUIRED)
 
-target_link_libraries(app PRIVATE Crow::Crow asio::asio)
+target_link_libraries(app PRIVATE Crow::Crow asio::asio fmt::fmt)
 
 if (WIN32)
 	add_custom_command( 
