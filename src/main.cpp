@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <crow.h>
-#include <format>
+#include <fmt/core.h>
+#include <fmt/chrono.h>
 #include <chrono>
 #include <random>
 #include <crow/middlewares/session.h>
@@ -15,7 +16,7 @@ std::string generateCookie()
 	std::random_device dev;
 	std::mt19937 rng(dev());
 	std::uniform_int_distribution<int> dist(1, 10000);
-	return std::format("date: {:%x} time: {:%T} --- {}", now, now, dist(rng));
+	return std::format("date: {:%Y-%m-%d} time: {:%H:%M:%S} --- {}", now, now, dist(rng));
 }
 
 std::string readFile(const std::string& path) 
