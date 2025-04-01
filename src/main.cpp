@@ -55,7 +55,16 @@ int main(int argc, char** argv)
 
 		std::string script = readFile("static/" + filename);
 		crow::response response(script);
-		response.set_header("Content-Type", "application/javascript");
+
+		if (filename.rfind(".js") != std::string::npos)
+		{
+			response.set_header("Content-Type", "application/javascript");
+		}
+		else if (filename.rfind(".css") != std::string::npos)
+		{
+			response.set_header("Content-Type", "text/css");
+		}
+
 		return response;
 	});
 
