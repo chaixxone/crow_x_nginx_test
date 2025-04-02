@@ -1,11 +1,11 @@
 server {
   listen 80 default_server;
-  root ~/crow_x_nginx_test/build/templates;
+  root /var/crow_x_nginx_test/build/templates;
   index index.html;
   location / {
     proxy_pass http://localhost:5559;
   }
   location /static/ {
-    root ~/crow_x_nginx_test/build;
+    root /var/crow_x_nginx_test/build;
   }
 }
