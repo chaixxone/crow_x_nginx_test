@@ -12,11 +12,11 @@ using Session = crow::SessionMiddleware<crow::FileStore>;
 // returns timestamp of first user entrance
 std::string generateCookie()
 {
-	auto now = std::chrono::current_zone()->to_local(std::chrono::system_clock::now());
+	auto now = fmt::localtime(std::time(nullptr));
 	std::random_device dev;
 	std::mt19937 rng(dev());
 	std::uniform_int_distribution<int> dist(1, 10000);
-	return std::format("date: {:%Y-%m-%d} time: {:%H:%M:%S} --- {}", now, now, dist(rng));
+	return fmt::format("date: {:%Y-%m-%d} time: {:%H:%M:%S} --- {}", now, now, dist(rng));
 }
 
 std::string readFile(const std::string& path) 
